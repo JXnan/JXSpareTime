@@ -12,6 +12,12 @@
 		841313071D0E8C6300E57888 /* project.xcscheme in Resources */ = {isa = PBXBuildFile; fileRef = 841313061D0E8C6300E57888 /* project.xcscheme */; };
 		8413130A1D0E8C6300E57888 /* project.m in Sources */ = {isa = PBXBuildFile; fileRef = 841313091D0E8C6300E57888 /* project.m */; };
 		8413130D1D0E8C6300E57888 /* NSObject_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8413130C1D0E8C6300E57888 /* NSObject_Extension.m */; };
+		84DEEACB1D1288D5003ED9B7 /* NSString+JXRegular.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEACA1D1288D5003ED9B7 /* NSString+JXRegular.m */; };
+		84DEEACF1D1289FB003ED9B7 /* JXClassifiedModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEACE1D1289FB003ED9B7 /* JXClassifiedModel.m */; };
+		84DEEAD21D128D6A003ED9B7 /* JXEnumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEAD11D128D6A003ED9B7 /* JXEnumModel.m */; };
+		84DEEAD51D128D90003ED9B7 /* JXPropertyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEAD41D128D90003ED9B7 /* JXPropertyModel.m */; };
+		84DEEAD81D128DA3003ED9B7 /* JXMethodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEAD71D128DA3003ED9B7 /* JXMethodModel.m */; };
+		84DEEADB1D1290B4003ED9B7 /* JXClassFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEADA1D1290B4003ED9B7 /* JXClassFileModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,19 @@
 		8413130B1D0E8C6300E57888 /* NSObject_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSObject_Extension.h; sourceTree = "<group>"; };
 		8413130C1D0E8C6300E57888 /* NSObject_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSObject_Extension.m; sourceTree = "<group>"; };
 		8413130E1D0E8C6300E57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84DEEAC91D1288D5003ED9B7 /* NSString+JXRegular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JXRegular.h"; sourceTree = "<group>"; };
+		84DEEACA1D1288D5003ED9B7 /* NSString+JXRegular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JXRegular.m"; sourceTree = "<group>"; };
+		84DEEACD1D1289FB003ED9B7 /* JXClassifiedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXClassifiedModel.h; sourceTree = "<group>"; };
+		84DEEACE1D1289FB003ED9B7 /* JXClassifiedModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXClassifiedModel.m; sourceTree = "<group>"; };
+		84DEEAD01D128D6A003ED9B7 /* JXEnumModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXEnumModel.h; sourceTree = "<group>"; };
+		84DEEAD11D128D6A003ED9B7 /* JXEnumModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXEnumModel.m; sourceTree = "<group>"; };
+		84DEEAD31D128D90003ED9B7 /* JXPropertyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXPropertyModel.h; sourceTree = "<group>"; };
+		84DEEAD41D128D90003ED9B7 /* JXPropertyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXPropertyModel.m; sourceTree = "<group>"; };
+		84DEEAD61D128DA3003ED9B7 /* JXMethodModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXMethodModel.h; sourceTree = "<group>"; };
+		84DEEAD71D128DA3003ED9B7 /* JXMethodModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXMethodModel.m; sourceTree = "<group>"; };
+		84DEEAD91D1290B4003ED9B7 /* JXClassFileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXClassFileModel.h; sourceTree = "<group>"; };
+		84DEEADA1D1290B4003ED9B7 /* JXClassFileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXClassFileModel.m; sourceTree = "<group>"; };
+		84EA96D41D153EA40064B233 /* heard.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = heard.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +61,9 @@
 		841312F41D0E8C6300E57888 = {
 			isa = PBXGroup;
 			children = (
+				84EA96D41D153EA40064B233 /* heard.pch */,
+				84DEEACC1D1288F4003ED9B7 /* Model */,
+				84DEEAC81D1288B9003ED9B7 /* Vender(第三方) */,
 				841313041D0E8C6300E57888 /* project */,
 				841312FF1D0E8C6300E57888 /* Frameworks */,
 				841312FE1D0E8C6300E57888 /* Products */,
@@ -84,6 +106,32 @@
 				841313061D0E8C6300E57888 /* project.xcscheme */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		84DEEAC81D1288B9003ED9B7 /* Vender(第三方) */ = {
+			isa = PBXGroup;
+			children = (
+				84DEEAC91D1288D5003ED9B7 /* NSString+JXRegular.h */,
+				84DEEACA1D1288D5003ED9B7 /* NSString+JXRegular.m */,
+			);
+			path = "Vender(第三方)";
+			sourceTree = "<group>";
+		};
+		84DEEACC1D1288F4003ED9B7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				84DEEACD1D1289FB003ED9B7 /* JXClassifiedModel.h */,
+				84DEEACE1D1289FB003ED9B7 /* JXClassifiedModel.m */,
+				84DEEAD01D128D6A003ED9B7 /* JXEnumModel.h */,
+				84DEEAD11D128D6A003ED9B7 /* JXEnumModel.m */,
+				84DEEAD31D128D90003ED9B7 /* JXPropertyModel.h */,
+				84DEEAD41D128D90003ED9B7 /* JXPropertyModel.m */,
+				84DEEAD61D128DA3003ED9B7 /* JXMethodModel.h */,
+				84DEEAD71D128DA3003ED9B7 /* JXMethodModel.m */,
+				84DEEAD91D1290B4003ED9B7 /* JXClassFileModel.h */,
+				84DEEADA1D1290B4003ED9B7 /* JXClassFileModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +201,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84DEEACF1D1289FB003ED9B7 /* JXClassifiedModel.m in Sources */,
+				84DEEAD21D128D6A003ED9B7 /* JXEnumModel.m in Sources */,
+				84DEEAD51D128D90003ED9B7 /* JXPropertyModel.m in Sources */,
+				84DEEACB1D1288D5003ED9B7 /* NSString+JXRegular.m in Sources */,
 				8413130A1D0E8C6300E57888 /* project.m in Sources */,
+				84DEEAD81D128DA3003ED9B7 /* JXMethodModel.m in Sources */,
+				84DEEADB1D1290B4003ED9B7 /* JXClassFileModel.m in Sources */,
 				8413130D1D0E8C6300E57888 /* NSObject_Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +296,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
+				GCC_PREFIX_HEADER = /Users/admin/Desktop/project/heard.pch;
 				INFOPLIST_FILE = project/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -257,6 +312,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEPLOYMENT_LOCATION = YES;
 				DSTROOT = "$(HOME)";
+				GCC_PREFIX_HEADER = /Users/admin/Desktop/project/heard.pch;
 				INFOPLIST_FILE = project/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/Developer/Shared/Xcode/Plug-ins";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -285,6 +341,7 @@
 				841313131D0E8C6300E57888 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

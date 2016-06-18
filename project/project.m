@@ -7,6 +7,9 @@
 //
 
 #import "project.h"
+#import "JXEnumModel.h"
+#import "JXClassFileModel.h"
+#import "NSString+JXRegular.h"
 
 @interface project()
 
@@ -71,8 +74,13 @@
 
 - (void)doMenuAction:(NSMenuItem *)Item
 {
+    
+    
+    
+    
     if (_view) {
-        NSLog(@"%@",_view.textStorage.string);
+        JXClassFileModel * model = [[JXClassFileModel alloc] initWithDeclarationString:_view.textStorage.string];
+        [model test];
     }
 }
 
