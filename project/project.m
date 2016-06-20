@@ -37,6 +37,7 @@
                                                  selector:@selector(didApplicationFinishLaunchingNotification:)
                                                      name:NSApplicationDidFinishLaunchingNotification
                                                    object:nil];
+        
     }
     sharedPlugin = self;
     return self;
@@ -74,7 +75,7 @@
 
 - (void)doMenuAction:(NSMenuItem *)Item
 {
-    
+
     
     
     

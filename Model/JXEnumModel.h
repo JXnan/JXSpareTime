@@ -16,7 +16,7 @@
 @property(nonatomic,strong) NSArray<NSDictionary *> *values;
 
 - (instancetype)initWithDeclaration:(NSString *)declara;
-+ (instancetype)propertyModelWithDeclaration:(NSString *)declara;
++ (instancetype)enumModelWithDeclaration:(NSString *)declara;
 
 
 

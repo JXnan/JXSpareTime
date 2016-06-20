@@ -9,8 +9,9 @@
 #import "JXMethodModel.h"
 #import "NSString+JXRegular.h"
 
-NSString * const JXMethodExpression = @"[-+].*;";
-NSString * const JXMethodNameExpression = @"(?:\\))[a-zA-Z]+?(?=[:;])";
+NSString * const JXMethodExpression = @"[+-]\\s\\([a-zA-Z_ <>*]*\\)[\\w\\W]*?;";
+NSString * const JXMethodNameExpression = @"(?:\\))[a-zA-Z]+?(?=[:; ])";
+//NSString * const JXMethodNameExpression = @"[+-]\\s\\([a-zA-Z_ <>*]*\\)[\\w\\W]*?(?=[;])";
 NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
 
 @implementation JXMethodModel
@@ -29,9 +30,14 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
             _declaration = [declara copy];
             
             //  )removeObjectsFromIndices
-            NSString * str = [[declara getTheTextFromTheExpression:JXMethodNameExpression] lastObject];
-            //  removeObjectsFromIndices
-            _name = [str substringFromIndex:1];
+            NSArray * array = [declara getTheTextFromTheExpression:JXMethodNameExpression];
+            if (array.count > 0) {
+                NSString * str = [array objectAtIndex:0];
+                //  removeObjectsFromIndices
+                _name = [str substringFromIndex:1];
+            }
+
+            
             _parameters = [self extractionParametersWithDeclaration:declara];
             NSRange range1 = [declara rangeOfString:@"("];
             NSRange range2 = [declara rangeOfString:@")"];
@@ -59,11 +65,22 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
 - (NSArray *)extractionParametersWithDeclaration:(NSString *)declara{
     // :(NSUInteger)cnt
     NSMutableArray * array = [[declara getTheTextFromTheExpression:JXMethodParameterExpression] mutableCopy];
+    if (array.count == 0) return nil;
     [array enumerateObjectsUsingBlock:^(NSString * obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [array replaceObjectAtIndex:idx withObject:[obj substringFromIndex:1]];
         
     }];
-    return array;
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (NSString *str in array) {
+        NSArray * tmpArray = [str componentsSeparatedByString:@")"];
+        NSString * key = [tmpArray lastObject];
+        NSString * value = [tmpArray[0] substringFromIndex:1];
+        NSDictionary * dic = @{key:value};
+        [resultArray addObject:dic];
+    }
+    
+    
+    return resultArray;
 }
 
 #pragma mark - override
@@ -78,7 +95,7 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
  
  */
 - (NSString *)description{
-    return [NSString stringWithFormat:@"JXMethodModel{name:%@---type:%ld---return:%@ \n parameters:%@ \n }",_name,(long)_type,_returnType,_parameters];
+    return [NSString stringWithFormat:@"JXMethodModel{name:%@---type:%ld---return:%@---parameters:%@",_name,(long)_type,_returnType,_parameters];
 }
 
 

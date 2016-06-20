@@ -40,10 +40,8 @@ NSString * const JXCommentSingleExpression = @"//.*";
         str = [self deleteCommentForString:str];
         _classifiedArray = [str getTheTextFromTheExpression:JXClassifiedExpression];
         _enumArray = [str getTheTextFromTheExpression:JXEnumExpression];
-        
         _constArray = [str getTheTextFromTheExpression:JXConstExpression];
         _consts = _constArray;
-        
     }
     return self;
 }
@@ -64,33 +62,35 @@ NSString * const JXCommentSingleExpression = @"//.*";
 
 #pragma mark - public
 - (void)test{
-    NSLog(@"-----%@",_classifiedArray);
+    //NSLog(@"-----%@",_classifiedArray);
     
     
     
     //NSLog(@"!!!!!%@",_enumArray);
     //NSLog(@"=====%@",_constArray);
+
     
+    NSLog(@"const---%@",_consts);
     NSMutableArray * classArray = [NSMutableArray array];
     for (NSString * obj in _classifiedArray) {
         JXClassifiedModel * model = [JXClassifiedModel classifiedModelWithDeclaration:obj];
         [classArray addObject: model];
-        
-        NSLog(@"-----%@",model);
+        NSLog(@"class----%lu",(unsigned long)model.propertys.count);
+        NSLog(@"class----%@",model.propertys);
+        NSLog(@"class----%lu",(unsigned long)model.methods.count);
+        NSLog(@"class----%@",model.methods);
     }
     _classs = classArray;
-    
+
     
     NSMutableArray * enumArray = [[NSMutableArray alloc] init];
     for (NSString * obj in _enumArray) {
         JXEnumModel * model = [[JXEnumModel alloc] initWithDeclaration:obj];
         [enumArray addObject:model];
-//        NSLog(@"%@",model.name);
-//        NSLog(@"%@",model.type);
-//        NSLog(@"%@",model.values);
     }
     _enums = enumArray;
-    
+    NSLog(@"enum-----%lu",(unsigned long)enumArray.count);
+    NSLog(@"enum----%@",_enums);
 }
 
 #pragma mark - private

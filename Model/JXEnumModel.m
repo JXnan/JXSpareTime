@@ -28,6 +28,10 @@
     return self;
 }
 
++ (instancetype)enumModelWithDeclaration:(NSString *)declara{
+    return [[JXEnumModel alloc] initWithDeclaration:declara];
+}
+
 - (void)serializationEnumModelWithString:(NSString *)str{
     NSArray * array = [str componentsSeparatedByString:@"\n"];
     //  NS_ENUM(NSStringEncoding) {\n  NSASCIIStringEncoding = 1,\t\t\n
@@ -58,8 +62,6 @@
         
         
         if (objArray.count >= 2) {
-            //NSLog(@"::::::%@----%@",objArray[0],objArray[1]);
-            
             dic = @{objArray[0]:objArray[1]};
         }
         [listArray addObject:dic];
@@ -86,7 +88,7 @@
 #pragma mark - override
 
 - (NSString *)description{
-    return [NSString stringWithFormat:@"JXEnumModel{name:%@---type:%@---declaration:%@\n values:%@\n }",_name,_type,_declaration,_values];
+    return [NSString stringWithFormat:@"JXEnumModel{name:%@---type:%@--declaration:%@--values:%@",_name,_type,_declaration,_values];
 }
 
 @end

@@ -59,6 +59,8 @@
             [tmpArray addObject:model];
         }
         _methods = tmpArray;
+        
+        
     }
 
     
@@ -73,7 +75,7 @@
  @property(nonatomic,strong)NSMutableArray<JXMethodModel *> * methods;
  */
 - (NSString *)description{
-    return [NSString stringWithFormat:@"JXClassifiedModel{statement:%@---decalration:%@\n property:%@\n method:%@\n }",_statement,_declaration,_propertys,_methods];
+    return [NSString stringWithFormat:@"JXClassifiedModel{statement:%@--decalration:%@--property:%@--method:%@}",_statement,_declaration,_propertys,_methods];
 }
 
 @end

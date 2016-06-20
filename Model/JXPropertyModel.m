@@ -29,17 +29,36 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
         //判断格式是否正确
         if ([declara beganMatchWithType:JXPropertyExpression]) {
             _declaration = [declara copy];
-
+            NSArray * array = [declara componentsSeparatedByString:@" "];
+            NSMutableString * mStr = [NSMutableString stringWithString:_declaration];
             
-            NSArray<NSString *> * array = [declara getTheTextFromTheExpression:JXPropertyNameExpression];
-            if (array) {
-                NSString * str = array[0];
-                NSArray * properArray = [str componentsSeparatedByString:@" " ofMaxCount:2];
-                if (properArray.count >= 2) {
-                    _name = properArray[1];
-                    _type = properArray[0];
+            //去除版本标志
+            for (NSUInteger i = 0; i < array.count ; i++) {
+                NSRange range = [array[i] rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]];
+                if (range.length == 0) {
+                    [mStr deleteCharactersInRange:[mStr rangeOfString:array[i]]];
+                    //删除首尾空格
+                    mStr = [NSMutableString stringWithString:[mStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+                }
+                
+            }
+            
+            NSArray *spaceArray = [mStr componentsSeparatedByString:@" "];
+            _name = [spaceArray lastObject];
+            NSMutableString * typeString = [NSMutableString string];
+            for (NSUInteger i = 1; i < spaceArray.count - 1; i++) {
+                NSString * tmpStr = spaceArray[i];
+                NSRange range = [tmpStr rangeOfCharacterFromSet:[NSCharacterSet punctuationCharacterSet]];
+                if (range.length == 0) {
+                    [typeString appendString:tmpStr];
                 }
             }
+            
+            _type = typeString;
+            
+            
+            
+            
         }
     }
     return self;
@@ -58,6 +77,6 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
 
 #pragma mark - override
 - (NSString *)description{
-    return [NSString stringWithFormat:@"JXPropertyModel{name:%@---type:%@---declaration:%@ \n }",_name,_type,_declaration];
+    return [NSString stringWithFormat:@"JXPropertyModel{name:%@---type:%@---declaration:%@ \n } \n",_name,_type,_declaration];
 }
 @end
