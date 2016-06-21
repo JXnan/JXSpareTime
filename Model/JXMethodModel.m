@@ -12,7 +12,7 @@
 NSString * const JXMethodExpression = @"[+-]\\s\\([a-zA-Z_ <>*]*\\)[\\w\\W]*?;";
 NSString * const JXMethodNameExpression = @"(?:\\))[a-zA-Z]+?(?=[:; ])";
 //NSString * const JXMethodNameExpression = @"[+-]\\s\\([a-zA-Z_ <>*]*\\)[\\w\\W]*?(?=[;])";
-NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
+NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]+";
 
 @implementation JXMethodModel
 
@@ -41,7 +41,7 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
             _parameters = [self extractionParametersWithDeclaration:declara];
             NSRange range1 = [declara rangeOfString:@"("];
             NSRange range2 = [declara rangeOfString:@")"];
-            _returnType = [declara substringWithRange:NSMakeRange(range1.location, range2.location - range1.location)];
+            _returnType = [declara substringWithRange:NSMakeRange(range1.location + 1, range2.location - range1.location - 1)];
             
             if ([[declara substringToIndex:1] isEqualToString:@"-"]) {
                 _type = MethodObjectType;
@@ -78,8 +78,6 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]*";
         NSDictionary * dic = @{key:value};
         [resultArray addObject:dic];
     }
-    
-    
     return resultArray;
 }
 

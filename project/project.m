@@ -10,6 +10,8 @@
 #import "JXEnumModel.h"
 #import "JXClassFileModel.h"
 #import "NSString+JXRegular.h"
+#import <objc/runtime.h>
+#import "JXPropertyModel.h"
 
 @interface project()
 
@@ -67,7 +69,6 @@
     Class class = NSClassFromString(@"DVTSourceTextView");
     
     if ([not.object isKindOfClass: class] && _view != not.object){
-        NSLog(@"%@",not.name);
         _view = not.object;
     }
 }
@@ -76,14 +77,18 @@
 - (void)doMenuAction:(NSMenuItem *)Item
 {
 
-    
+
     
     
     if (_view) {
         JXClassFileModel * model = [[JXClassFileModel alloc] initWithDeclarationString:_view.textStorage.string];
-        [model test];
+        [model serialization];
+        
+        [model print];
     }
 }
+
+
 
 - (void)dealloc
 {

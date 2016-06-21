@@ -18,31 +18,28 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
 
 
 - (instancetype)init{
-    
     return [self initWithDeclaration:nil];
 }
 
 -(instancetype)initWithDeclaration:(NSString *)declara{
     self = [super init];
     if (self && declara) {
-        
+        //@property (readonly) BOOL boolValue NS_AVAILABLE(10_5, 2_0);
         //判断格式是否正确
         if ([declara beganMatchWithType:JXPropertyExpression]) {
             _declaration = [declara copy];
             NSArray * array = [declara componentsSeparatedByString:@" "];
             NSMutableString * mStr = [NSMutableString stringWithString:_declaration];
-            
             //去除版本标志
             for (NSUInteger i = 0; i < array.count ; i++) {
                 NSRange range = [array[i] rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]];
-                if (range.length == 0) {
+                if (range.length == 0 && ![array[i] isEqualToString:@"BOOL"]) {
                     [mStr deleteCharactersInRange:[mStr rangeOfString:array[i]]];
                     //删除首尾空格
                     mStr = [NSMutableString stringWithString:[mStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
                 }
-                
             }
-            
+            //@property (readonly) BOOL boolValue
             NSArray *spaceArray = [mStr componentsSeparatedByString:@" "];
             _name = [spaceArray lastObject];
             NSMutableString * typeString = [NSMutableString string];
@@ -53,7 +50,6 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
                     [typeString appendString:tmpStr];
                 }
             }
-            
             _type = typeString;
             
             

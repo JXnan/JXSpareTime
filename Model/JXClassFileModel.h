@@ -22,5 +22,7 @@
 
 + (instancetype)ClassFileModelDeclarationString:(NSString *)str;
 
-- (void)test;
+- (void)serialization;
+
+- (void)print;
 @end

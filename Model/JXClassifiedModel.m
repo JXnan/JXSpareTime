@@ -8,8 +8,7 @@
 
 #import "JXClassifiedModel.h"
 #import "NSString+JXRegular.h"
-#import "JXPropertyModel.h"
-#import "JXMethodModel.h"
+
 
 @implementation JXClassifiedModel
 

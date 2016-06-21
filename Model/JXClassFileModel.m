@@ -15,7 +15,7 @@ NSString * const JXConstExpression = @".*NSString.{3}const.*";
 NSString * const JXCommentMoreExpression = @"/\\*[\\w\\W]*?\\*/";
 NSString * const JXCommentSingleExpression = @"//.*";
 
-
+NSString * const filePath = @"/Users/admin/Desktop/asd.md";
 
 
 @implementation JXClassFileModel
@@ -24,6 +24,7 @@ NSString * const JXCommentSingleExpression = @"//.*";
     NSArray * _classifiedArray;
     NSArray * _enumArray;
     NSArray * _constArray;
+    NSMutableString *_allString;
 }
 
 
@@ -37,12 +38,17 @@ NSString * const JXCommentSingleExpression = @"//.*";
 - (instancetype)initWithDeclarationString:(NSString *)str{
     self = [super init];
     if (self && str) {
+        _allString = [NSMutableString string];
+        
+        //NSArray *array = [str componentsSeparatedByString:<#(nonnull NSString *)#>]
+        
         str = [self deleteCommentForString:str];
         _classifiedArray = [str getTheTextFromTheExpression:JXClassifiedExpression];
         _enumArray = [str getTheTextFromTheExpression:JXEnumExpression];
         _constArray = [str getTheTextFromTheExpression:JXConstExpression];
         _consts = _constArray;
     }
+    
     return self;
 }
 
@@ -61,24 +67,12 @@ NSString * const JXCommentSingleExpression = @"//.*";
 
 
 #pragma mark - public
-- (void)test{
-    //NSLog(@"-----%@",_classifiedArray);
-    
-    
-    
-    //NSLog(@"!!!!!%@",_enumArray);
-    //NSLog(@"=====%@",_constArray);
+- (void)serialization{
 
-    
-    NSLog(@"const---%@",_consts);
     NSMutableArray * classArray = [NSMutableArray array];
     for (NSString * obj in _classifiedArray) {
         JXClassifiedModel * model = [JXClassifiedModel classifiedModelWithDeclaration:obj];
         [classArray addObject: model];
-        NSLog(@"class----%lu",(unsigned long)model.propertys.count);
-        NSLog(@"class----%@",model.propertys);
-        NSLog(@"class----%lu",(unsigned long)model.methods.count);
-        NSLog(@"class----%@",model.methods);
     }
     _classs = classArray;
 
@@ -89,11 +83,154 @@ NSString * const JXCommentSingleExpression = @"//.*";
         [enumArray addObject:model];
     }
     _enums = enumArray;
-    NSLog(@"enum-----%lu",(unsigned long)enumArray.count);
-    NSLog(@"enum----%@",_enums);
+
+}
+
+- (void)print{
+    [_allString appendString:@"##概要\n\n"];
+    [self printConst];
+    [self printEnumDeclare];
+    [self printPropertyDeclare];
+    [self printMethodDeclare];
+    [_allString appendString:@"##详细说明\n\n"];
+    [self printEnumDescription];
+    [self printPropertyDescription];
+    [self printMethodDescription];
+    NSError * error;
+    [_allString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (error) {
+        NSLog(@"失败!%ld",(long)error.code);
+    }
+    NSLog(@"%@",_allString);
+    
 }
 
 #pragma mark - private
+
+
+- (void)printConst{
+    if (_consts.count == 0) return;
+    
+    [_allString appendString:@"###常量\n\n"];
+    [_allString appendString:@"||\n"];
+    [_allString appendString:@"|-|\n"];
+    for (NSString *obj in _consts) {
+        [_allString appendFormat:@"|%@|\n",obj];
+        [_allString appendFormat:@"|`描述`|\n"];
+    }
+    [_allString appendString:@"\n"];
+}
+
+- (void)printEnumDeclare{
+    if (_enums.count == 0) return;
+    [_allString appendString:@"###枚举\n\n"];
+    [_allString appendString:@"|名称|类型|说明|\n"];
+    [_allString appendString:@"|-|-|-|\n"];
+    for (JXEnumModel *obj in _enums) {
+        [_allString appendFormat:@"|[%@](#%@)|%@|`描述`|\n",obj.name,obj.name,obj.type];
+    }
+    [_allString appendString:@"\n"];
+    
+}
+
+- (void)printEnumDescription{
+    if (_enums.count == 0) return;
+    [_allString appendString:@"###枚举\n\n"];
+
+    for (JXEnumModel *obj in _enums) {
+        [_allString appendFormat:@"**<span id = \"%@\">%@</span>**\n",obj.name,obj.name];
+        for (NSDictionary * dic in obj.values) {
+            [_allString appendFormat:@">- %@\t%@\n",[[dic allKeys] lastObject],[dic.allValues lastObject]];
+            [_allString appendFormat:@"`描述`\n"];
+        }
+        [_allString appendFormat:@"\n"];
+    }
+    [_allString appendString:@"\n"];
+}
+
+
+
+-(void)printPropertyDeclare{
+    
+    if (_classs.count == 0) return;
+    NSMutableArray *propertyArray = [NSMutableArray array];
+    for (JXClassifiedModel *obj in _classs) {
+        [propertyArray addObjectsFromArray:obj.propertys];
+    }
+    if (propertyArray.count == 0) return;
+    
+
+    [_allString appendString:@"###属性\n\n"];
+    [_allString appendString:@"|名称|类型|说明|\n"];
+    [_allString appendString:@"|-|-|-|\n"];
+    for (JXPropertyModel *obj in propertyArray) {
+        [_allString appendFormat:@"|[%@](#%@)|%@|`描述`|\n",obj.name,obj.name,obj.type];
+    }
+    [_allString appendString:@"\n"];
+    
+}
+
+
+- (void)printPropertyDescription{
+    if (_classs.count == 0) return;
+    NSMutableArray *propertyArray = [NSMutableArray array];
+    for (JXClassifiedModel *obj in _classs) {
+        [propertyArray addObjectsFromArray:obj.propertys];
+    }
+    if (propertyArray.count == 0) return;
+    [_allString appendString:@"###属性\n\n"];
+    for (JXPropertyModel *obj in propertyArray) {
+        [_allString appendFormat:@">- <span id = \"%@\">%@</span>\n",obj.name,obj.declaration];
+        [_allString appendFormat:@"`描述`\n"];
+    }
+    [_allString appendString:@"\n"];
+}
+
+
+
+- (void)printMethodDeclare{
+    if (_classs.count == 0) return;
+    NSMutableArray *MethodArray = [NSMutableArray array];
+    for (JXClassifiedModel *obj in _classs) {
+        [MethodArray addObjectsFromArray:obj.methods];
+    }
+    if (MethodArray.count == 0) return;
+    [_allString appendString:@"###方法\n\n"];
+    [_allString appendString:@"|类型|名称|返回值|说明|\n"];
+    [_allString appendString:@"|-|-|-|-|\n"];
+    for (JXMethodModel *obj in MethodArray) {
+        NSString * str = obj.type == MethodClassType ? @"+":@"-";
+        [_allString appendFormat:@"|%@|[%@](#%@)|%@|`描述`|\n",str,obj.name,obj.name,obj.returnType];
+    }
+    [_allString appendString:@"\n"];
+}
+
+- (void)printMethodDescription{
+    if (_classs.count == 0) return;
+    NSMutableArray *MethodArray = [NSMutableArray array];
+    for (JXClassifiedModel *obj in _classs) {
+        [MethodArray addObjectsFromArray:obj.methods];
+    }
+    if (MethodArray.count == 0) return;
+    [_allString appendString:@"###方法\n\n"];
+    for (JXMethodModel *obj in MethodArray) {
+        [_allString appendFormat:@"**<span id = \"%@\">%@</span>**\n",obj.name,obj.declaration];
+        [_allString appendFormat:@"`描述`\n\n"];
+        [_allString appendFormat:@"**参数说明**\n"];
+        [_allString appendFormat:@"```\n"];
+        [_allString appendFormat:@"@return: 描述\n"];
+        for (NSDictionary * dic in obj.parameters) {
+            [_allString appendFormat:@"@%@: 描述\n",[dic.allKeys lastObject]];
+        }
+        [_allString appendFormat:@"```\n"];
+        [_allString appendFormat:@"**例句**\n"];
+        [_allString appendFormat:@"```\n"];
+        [_allString appendFormat:@"例句代码\n"];
+        [_allString appendFormat:@"```\n"];
+    }
+    [_allString appendString:@"\n"];
+}
+
 
 
 //删除注释

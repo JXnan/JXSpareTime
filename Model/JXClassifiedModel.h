@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-@class JXPropertyModel,JXMethodModel;
+#import "JXPropertyModel.h"
+#import "JXMethodModel.h"
 
 
 @interface JXClassifiedModel : NSObject
