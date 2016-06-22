@@ -77,9 +77,6 @@
 - (void)doMenuAction:(NSMenuItem *)Item
 {
 
-
-    
-    
     if (_view) {
         JXClassFileModel * model = [[JXClassFileModel alloc] initWithDeclarationString:_view.textStorage.string];
         [model serialization];

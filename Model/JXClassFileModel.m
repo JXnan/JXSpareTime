@@ -15,8 +15,8 @@ NSString * const JXConstExpression = @".*NSString.{3}const.*";
 NSString * const JXCommentMoreExpression = @"/\\*[\\w\\W]*?\\*/";
 NSString * const JXCommentSingleExpression = @"//.*";
 
-NSString * const filePath = @"/Users/admin/Desktop/asd.md";
-
+NSString * const JXFilePath = @"/Users/admin/Desktop/";
+NSString * const JXFileType = @".md";
 
 @implementation JXClassFileModel
 
@@ -25,6 +25,7 @@ NSString * const filePath = @"/Users/admin/Desktop/asd.md";
     NSArray * _enumArray;
     NSArray * _constArray;
     NSMutableString *_allString;
+    NSString *_fileName;
 }
 
 
@@ -39,8 +40,11 @@ NSString * const filePath = @"/Users/admin/Desktop/asd.md";
     self = [super init];
     if (self && str) {
         _allString = [NSMutableString string];
+        NSArray * array = [str componentsSeparatedByString:@"\n"];
+        if (array.count == 0) return self;
+        _fileName = [array[0] substringFromIndex:2];
+        [_allString appendFormat:@"##%@\n\n",_fileName];
         
-        //NSArray *array = [str componentsSeparatedByString:<#(nonnull NSString *)#>]
         
         str = [self deleteCommentForString:str];
         _classifiedArray = [str getTheTextFromTheExpression:JXClassifiedExpression];
@@ -97,6 +101,8 @@ NSString * const filePath = @"/Users/admin/Desktop/asd.md";
     [self printPropertyDescription];
     [self printMethodDescription];
     NSError * error;
+    NSString *filePath = [NSString stringWithFormat:@"%@%@%@",JXFilePath,_fileName,JXFileType];
+    
     [_allString writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
     if (error) {
         NSLog(@"失败!%ld",(long)error.code);
