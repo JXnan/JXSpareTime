@@ -18,6 +18,7 @@
 		84DEEAD51D128D90003ED9B7 /* JXPropertyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEAD41D128D90003ED9B7 /* JXPropertyModel.m */; };
 		84DEEAD81D128DA3003ED9B7 /* JXMethodModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEAD71D128DA3003ED9B7 /* JXMethodModel.m */; };
 		84DEEADB1D1290B4003ED9B7 /* JXClassFileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DEEADA1D1290B4003ED9B7 /* JXClassFileModel.m */; };
+		84FA72B71D1B8BD10089FCF6 /* Foundation.framework in Resources */ = {isa = PBXBuildFile; fileRef = 841313021D0E8C6300E57888 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,6 +191,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FA72B71D1B8BD10089FCF6 /* Foundation.framework in Resources */,
 				841313071D0E8C6300E57888 /* project.xcscheme in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
