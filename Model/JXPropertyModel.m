@@ -31,8 +31,9 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
             NSArray * array = [declara componentsSeparatedByString:@" "];
             NSMutableString * mStr = [NSMutableString stringWithString:_declaration];
             //去除版本标志
-            for (NSUInteger i = 0; i < array.count ; i++) {
+            for (NSUInteger i = array.count - 1; i > 0 ; i--) {
                 NSRange range = [array[i] rangeOfCharacterFromSet:[NSCharacterSet lowercaseLetterCharacterSet]];
+                if ([array[i] isEqualToString:@""])continue;
                 if (range.length == 0 && ![array[i] isEqualToString:@"BOOL"]) {
                     [mStr deleteCharactersInRange:[mStr rangeOfString:array[i]]];
                     //删除首尾空格
@@ -52,8 +53,7 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
             }
             _type = typeString;
             
-            
-            
+            NSURLRequest
             
         }
     }
