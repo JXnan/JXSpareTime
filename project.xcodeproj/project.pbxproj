@@ -31,6 +31,7 @@
 		8413130B1D0E8C6300E57888 /* NSObject_Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSObject_Extension.h; sourceTree = "<group>"; };
 		8413130C1D0E8C6300E57888 /* NSObject_Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSObject_Extension.m; sourceTree = "<group>"; };
 		8413130E1D0E8C6300E57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84A49ECF1D1BBC2C006EE351 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		84DEEAC91D1288D5003ED9B7 /* NSString+JXRegular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JXRegular.h"; sourceTree = "<group>"; };
 		84DEEACA1D1288D5003ED9B7 /* NSString+JXRegular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JXRegular.m"; sourceTree = "<group>"; };
 		84DEEACD1D1289FB003ED9B7 /* JXClassifiedModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXClassifiedModel.h; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 				8413130C1D0E8C6300E57888 /* NSObject_Extension.m */,
 				8413130E1D0E8C6300E57888 /* Info.plist */,
 				841313051D0E8C6300E57888 /* Supporting Files */,
+				84A49ECF1D1BBC2C006EE351 /* Header.h */,
 			);
 			path = project;
 			sourceTree = "<group>";

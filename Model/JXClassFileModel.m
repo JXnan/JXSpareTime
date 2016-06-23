@@ -10,7 +10,7 @@
 #import "NSString+JXRegular.h"
 
 NSString * const JXClassifiedExpression     = @"@[^c][\\w\\W]*?@end";
-NSString * const JXEnumExpression           = @".*\\{[\\w\\W]*?\\}.*;";
+NSString * const JXEnumExpression           = @"[a-z]{4,}.*\\(.*\\)\\s\\{[\\w\\W]+?\\}";
 NSString * const JXConstExpression          = @".*NSString.{3}const.*";
 NSString * const JXCommentMoreExpression    = @"/\\*[\\w\\W]*?\\*/";
 NSString * const JXCommentSingleExpression  = @"//.*";

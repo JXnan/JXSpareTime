@@ -59,7 +59,7 @@
         [actionMenuItem setTag:10000];
         [actionMenuItem setTarget:self];
         [[menuItem submenu] addItem:actionMenuItem];
-    
+        
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureSourceTextViewNotification:) name:NSViewDidUpdateTrackingAreasNotification object:nil];
