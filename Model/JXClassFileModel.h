@@ -13,10 +13,10 @@
 
 @interface JXClassFileModel : NSObject
 
-@property(nonatomic,copy)NSString * name;
-@property(nonatomic,strong)NSArray<JXEnumModel *> *enums;
-@property(nonatomic,strong)NSArray<NSString *> *consts;
-@property(nonatomic,strong)NSArray<JXClassifiedModel *> *classs;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, strong) NSArray<JXEnumModel *> *enums;
+@property (nonatomic, strong) NSArray<NSString *> *consts;
+@property (nonatomic, strong) NSArray<JXClassifiedModel *> *classs;
 
 - (instancetype)initWithDeclarationString:(NSString *)str;
 

@@ -9,14 +9,17 @@
 #import "JXClassFileModel.h"
 #import "NSString+JXRegular.h"
 
-NSString * const JXClassifiedExpression = @"@[^c][\\w\\W]*?@end";
-NSString * const JXEnumExpression = @".*\\{[\\w\\W]*?\\}.*;";
-NSString * const JXConstExpression = @".*NSString.{3}const.*";
-NSString * const JXCommentMoreExpression = @"/\\*[\\w\\W]*?\\*/";
-NSString * const JXCommentSingleExpression = @"//.*";
+NSString * const JXClassifiedExpression     = @"@[^c][\\w\\W]*?@end";
+NSString * const JXEnumExpression           = @".*\\{[\\w\\W]*?\\}.*;";
+NSString * const JXConstExpression          = @".*NSString.{3}const.*";
+NSString * const JXCommentMoreExpression    = @"/\\*[\\w\\W]*?\\*/";
+NSString * const JXCommentSingleExpression  = @"//.*";
+NSString * const JXFileNameExpression       = @"[A-Z][a-zA-Z]+?\\.h";
 
 NSString * const JXFilePath = @"/Users/admin/Desktop/";
 NSString * const JXFileType = @".md";
+
+
 
 @implementation JXClassFileModel
 
@@ -40,9 +43,11 @@ NSString * const JXFileType = @".md";
     self = [super init];
     if (self && str) {
         _allString = [NSMutableString string];
-        NSArray * array = [str componentsSeparatedByString:@"\n"];
+        NSArray * array = [str getTheTextFromTheExpression:JXFileNameExpression];
         if (array.count == 0) return self;
-        _fileName = [array[0] substringFromIndex:2];
+        _fileName = array[0];
+        
+        
         [_allString appendFormat:@"##%@\n\n",_fileName];
         
         

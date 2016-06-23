@@ -53,7 +53,7 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
             }
             _type = typeString;
             
-            NSURLRequest
+          
             
         }
     }
