@@ -11,7 +11,7 @@
 
 
 
-NSString * const JXPropertyExpression = @"@.*;";
+NSString * const JXPropertyExpression = @"@property.*;";
 //NSString * const JXPropertyNameExpression = @"[A-Z][a-zA-Z]* \\*?[A-Za-z]*";
 NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
 @implementation JXPropertyModel
