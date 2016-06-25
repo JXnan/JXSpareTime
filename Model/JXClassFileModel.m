@@ -81,7 +81,9 @@ NSString * const JXFileType = @".md";
     NSMutableArray * classArray = [NSMutableArray array];
     for (NSString * obj in _classifiedArray) {
         JXClassifiedModel * model = [JXClassifiedModel classifiedModelWithDeclaration:obj];
-        [classArray addObject: model];
+        if (![model.statement containsString:@"Deprecated"]) {
+            [classArray addObject: model];
+        }
     }
     _classs = classArray;
 
