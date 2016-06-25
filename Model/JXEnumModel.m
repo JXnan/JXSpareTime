@@ -58,11 +58,14 @@
         NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@",    "];
         [objArray makeObjectsPerformSelector:@selector(stringByTrimmingCharactersInSet:) withObject:set];
         if ([objArray[0] rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet]].length == 0) continue;
-        NSDictionary * dic = @{objArray[0]:@""};
+        NSString *key = [objArray firstObject];
+        NSArray *versionArray = [key componentsSeparatedByString:@"NS_"];
+        
+        NSDictionary * dic = @{versionArray[0]:@""};
         
         
         if (objArray.count >= 2) {
-            dic = @{objArray[0]:objArray[1]};
+            dic = @{versionArray[0]:objArray[1]};
         }
         [listArray addObject:dic];
         

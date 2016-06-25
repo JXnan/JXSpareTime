@@ -27,10 +27,15 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]+";
     self = [super init];
     if (self && declara) {
         if([declara beganMatchWithType:JXMethodExpression]){
-            _declaration = [declara copy];
+            
+            NSArray<NSString *> *versionArray = [declara componentsSeparatedByString:@"NS_"];
+            _declaration = [versionArray[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            if (versionArray.count > 1) {
+                _declaration = [_declaration stringByAppendingString:@";"];
+            }
             
             //  )removeObjectsFromIndices
-            NSArray * array = [declara getTheTextFromTheExpression:JXMethodNameExpression];
+            NSArray * array = [_declaration getTheTextFromTheExpression:JXMethodNameExpression];
             if (array.count > 0) {
                 NSString * str = [array objectAtIndex:0];
                 //  removeObjectsFromIndices
@@ -39,8 +44,8 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]+";
 
             
             _parameters = [self extractionParametersWithDeclaration:declara];
-            NSRange range1 = [declara rangeOfString:@"("];
-            NSRange range2 = [declara rangeOfString:@")"];
+            NSRange range1 = [_declaration rangeOfString:@"("];
+            NSRange range2 = [_declaration rangeOfString:@")"];
             _returnType = [declara substringWithRange:NSMakeRange(range1.location + 1, range2.location - range1.location - 1)];
             
             if ([[declara substringToIndex:1] isEqualToString:@"-"]) {

@@ -27,8 +27,14 @@ NSString * const JXPropertyNameExpression = @"\\b[a-z][a-zA-Z]*[a-z]";
         //@property (readonly) BOOL boolValue NS_AVAILABLE(10_5, 2_0);
         //判断格式是否正确
         if ([declara beganMatchWithType:JXPropertyExpression]) {
-            _declaration = [declara copy];
-            NSArray * array = [declara componentsSeparatedByString:@" "];
+            NSArray *versionArray = [declara componentsSeparatedByString:@"NS_"];
+            _declaration = [versionArray[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            _declaration = versionArray[0];
+            if (versionArray.count > 1) {
+                _declaration = [_declaration stringByAppendingString:@";"];
+            }
+            
+            NSArray *array = [_declaration componentsSeparatedByString:@" "];
             NSMutableString * mStr = [NSMutableString stringWithString:_declaration];
             //去除版本标志
             for (NSUInteger i = array.count - 1; i > 0 ; i--) {
