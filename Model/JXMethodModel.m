@@ -10,7 +10,8 @@
 #import "NSString+JXRegular.h"
 
 NSString * const JXMethodExpression = @"[+-]\\s\\([a-zA-Z_ <>*]*\\)[\\w\\W]*?;";
-NSString * const JXMethodNameExpression = @"(?:\\))[a-zA-Z]+?(?=[:; ])";
+NSString * const JXMethodNameExpression = @"\\b[a-z][a-zA-Z]+?(?=[ ;])";
+NSString * const JXMethodAllNameExpression = @"\\b[a-z][a-zA-Z]+?(?=[:])";
 //NSString * const JXMethodNameExpression = @"[+-]\\s\\([a-zA-Z_ <>*]*\\)[\\w\\W]*?(?=[;])";
 NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]+";
 
@@ -35,13 +36,19 @@ NSString * const JXMethodParameterExpression = @":.*?\\)[a-zA-Z]+";
             }
             
             //  )removeObjectsFromIndices
-            NSArray * array = [_declaration getTheTextFromTheExpression:JXMethodNameExpression];
-            if (array.count > 0) {
-                NSString * str = [array objectAtIndex:0];
-                //  removeObjectsFromIndices
-                _name = [str substringFromIndex:1];
+            NSArray * array = [_declaration getTheTextFromTheExpression:JXMethodAllNameExpression];
+            if (array.count == 0) {
+                array = [_declaration getTheTextFromTheExpression:JXMethodNameExpression];
+                if (array.count == 0) {
+                    return nil;
+                }
             }
-
+            NSMutableString *nameString = [NSMutableString string];
+            for (NSString *str in array) {
+                [nameString appendFormat:@"%@:",str];
+            }
+            _name = [nameString substringToIndex:nameString.length - 1];
+            
             
             _parameters = [self extractionParametersWithDeclaration:declara];
             NSRange range1 = [_declaration rangeOfString:@"("];

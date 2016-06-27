@@ -215,14 +215,14 @@ NSString * const JXFileType = @".md";
     [_allString appendString:@"|-|-|-|-|\n"];
     for (JXMethodModel *obj in MethodArray) {
         NSString * str = obj.type == MethodClassType ? @"+":@"-";
-        NSMutableString *declare = [NSMutableString stringWithString:obj.name];
-        for (NSDictionary *dic in obj.parameters) {
-            [declare appendString:@": "];
-            [declare appendString:[[dic allKeys] firstObject]];
-        }
         
-        
-        [_allString appendFormat:@"|%@|[%@](#%@)|%@|`描述`|\n",str,declare,obj.name,obj.returnType];
+//        NSMutableString *declare = [NSMutableString stringWithString:obj.name];
+//        for (NSDictionary *dic in obj.parameters) {
+//            [declare appendString:@": "];
+//            [declare appendString:[[dic allKeys] firstObject]];
+//        }
+        NSString *name = [obj.name stringByReplacingOccurrencesOfString:@":" withString:@"<br>"];
+        [_allString appendFormat:@"|%@|[%@](#%@)|%@|`描述`|\n",str,name,obj.name,obj.returnType];
     }
     [_allString appendString:@"\n"];
 }
